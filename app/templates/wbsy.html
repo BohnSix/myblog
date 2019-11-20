@@ -22,7 +22,7 @@
     {% if current_user.is_authenticated %}
     <small style="float: right"><a href="{{ url_for('auth.edit_post', id=post.id)}}">修改</a></small>
     {% endif %}
-    <small style="float: right">{{ moment(post.timestamp).format('LLLL') }}</small>
+    <small style="float: right">{{ post.timestamp }}</small>
 </div>
 {% endfor %}
 

@@ -9,12 +9,15 @@ from app.models import *
 @main.route('/')
 def index():
     articles = Article.query.order_by(Article.timestamp.desc())
-    return render_template('index.html', articles=articles)
+    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    return render_template('index.html', articles=articles, blog_info=blog_info)
 
 
 @main.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    blog_info = BlogInfo.query.filter_by(choose=True).first()
+
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
@@ -24,12 +27,13 @@ def login():
             flash(u'用户名或密码错误！', 'danger')
     if form.errors:
         flash(u'登陆失败，请尝试重新登陆！', 'danger')
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, blog_info=blog_info)
 
 
 @main.route("/resume/", methods=["GET", "POST"])
 def show_resume():
-    return render_template("resume.html")
+    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    return render_template("resume.html", blog_info=blog_info)
 
 
 @main.route('/wbsy/')
@@ -38,14 +42,16 @@ def wbsy():
         return redirect(url_for("auth.wbsy"))
     page = request.args.get('page', 1, type=int)
     categories = Category.query.all()
+    blog_info = BlogInfo.query.filter_by(choose=True).first()
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
     next_url = url_for('main.wbsy', page=posts.next_num if posts.has_next else None)
     prev_url = url_for('main.wbsy', page=posts.prev_num if posts.has_prev else None)
     return render_template('wbsy.html', posts=posts.items, categories=categories,
-                           next_url=next_url, prev_url=prev_url)
+                           blog_info=blog_info, next_url=next_url, prev_url=prev_url)
 
 
 @main.route('/me/', methods=["GET", "POST"])
 def about_me():
-    return render_template("me.html")
+    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    return render_template("me.html", blog_info=blog_info)

@@ -42,27 +42,6 @@ class Category(db.Model):
     def delete_category(self, name):
         pass
 
-    @staticmethod
-    def init_categories():
-        categories = [u'首页', u'无病呻吟', u'好好学习', u'web开发', u'杀托烤鸭',
-                      u'坚持运动', u'预则立', u'remix']
-        for category in categories:
-            category = Category(name=category)
-            db.session.add(category)
-        db.session.commit()
-
-    @staticmethod
-    def delete_category(name):
-        category = Category.query.filter_by(name=name).first()
-        if category:
-            db.session.delete(category)
-            db.session.commit()
-
-    @staticmethod
-    def return_categories():
-        categories = [(c.id, c.name) for c in Category.query.all()]
-        return categories
-
     def __repr__(self):
         return '<Category %r>' % self.name
 
@@ -103,13 +82,14 @@ class BlogInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
     signature = db.Column(db.Text)
-    navbar = db.Column(db.String(64))
+    name = db.Column(db.String(64))
+    selfIntro = db.Column(db.String(64))
+    github = db.Column(db.String(64))
+    email = db.Column(db.String(64))
+    choose = db.Column(db.Boolean)
+    # friendLink = db.Column(db.String(64))  # 用外键连接一张表
+    # avatar = db.Column(db.Text)
 
-    @staticmethod
-    def insert_blog_info():
-        blog = BlogInfo(title="Bohn's pit", signature=u"悟已往之不谏，知来者之可追。", navbar='inverse')
-        db.session.add(blog)
-        db.session.commit()
 
 # class BlogView(db.Model):
 #     __tablename__ = 'blogView'

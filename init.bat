@@ -1,0 +1,1 @@
+pip  install  -i  https://pypi.doubanio.com/simple/  --trusted-host pypi.doubanio.com flask flask-moment flask-migrate flask-bootstrap flask-wtf faker flask-login flask-ckeditor flask-script

@@ -4,7 +4,7 @@
 {%- block html %}
 <head>
     {%- block head %}
-    <title>{% block title %}Bohn's{% endblock title %}</title>
+    <title>{% block title %}{{ blog_info.title }}{% endblock title %}</title>
     {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
     {{ moment.lang('zh-CN') }}
     {%- block metas %}
@@ -35,8 +35,8 @@
 <div class="container">
     <div class="sidebar">
         <div class="caption caption-header">
-            <p style="color: white; font-size: 22px">Bohn's</p>
-            <p style="color: #DDD; font-size: 13px">高度自律即绝对自由。</p>
+            <p style="color: white; font-size: 22px">{{ blog_info.title }}</p>
+            <p style="color: #DDD; font-size: 13px">{{ blog_info.signature }}</p>
         </div>
         <nav class="frame">
             <div class="menu"><a type="button" class="btn" href="{{ url_for('main.index') }}"> 首页(constructing) </a>
@@ -55,14 +55,14 @@
             <div class="profile">
                 <img src="{{ url_for('static', filename='3.jpg') }}" style="width: 126px">
             </div>
-            <h3>Bohn</h3>
-            <p style="color: #999999">大三/通信/游泳/篮球/轮滑</p>
+            <h3>{{ blog_info.name }}</h3>
+            <p style="color: #999999">{{ blog_info.selfIntro }}</p>
             <hr>
             <h4>友情链接</h4>
             <hr>
             <div class="caption">
-                <a class="friendLink" href="https://www.v2ex.com">v2ex</a>
-                <a class="friendLink" href="https://www.v2ex.com">v2ex</a>
+                <a class="friendLink" href="{{ blog_info.github }}">github</a>
+                <a class="friendLink" href="">Email</a>
                 <a class="friendLink" href="www.v2ex.com">v2ex</a>
             </div>
         </div>

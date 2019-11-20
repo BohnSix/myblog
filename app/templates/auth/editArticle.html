@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from 'macros.html' import form_field %}
+
+{% block main %}
+<div class="mypost">
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form_field(form.title) }}
+        {{ form_field(form.summary) }}
+        {{ form_field(form.content) }}
+        {{ form.submit }}
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ ckeditor.load() }}
+{% endblock %}

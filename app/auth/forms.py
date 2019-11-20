@@ -5,7 +5,7 @@ from flask_ckeditor import CKEditorField
 
 
 class PostForm(FlaskForm):
-    content = TextAreaField(validators=[DataRequired()])
+    content = CKEditorField(validators=[DataRequired()])
     submit = SubmitField(u'提交')
 
 
@@ -17,11 +17,11 @@ class LoginForm(FlaskForm):
 
 class ArticleForm(FlaskForm):
     title = StringField(u"标题", validators=[DataRequired(), Length(1, 64)])
-    content = TextAreaField(u"文章", validators=[DataRequired()])
     summary = TextAreaField(u"简介")
+    content = CKEditorField(u"文章", validators=[DataRequired()])
     # source = SelectField(u"来源")
     # type = SelectField(u"类型")
-    submit = SubmitField()
+    submit = SubmitField(u"提交")
 
 
 class RichTextForm(FlaskForm):
@@ -30,10 +30,11 @@ class RichTextForm(FlaskForm):
     summary = TextAreaField(u"简介")
     submit = SubmitField(u"提交")
 
+
 class EditArticleForm(FlaskForm):
     title = StringField(u"标题", validators=[DataRequired(), Length(1, 64)])
-    content = TextAreaField(u"文章", validators=[DataRequired()])
-    summary = TextAreaField(u"简介")
+    summary = CKEditorField(u"简介")
+    content = CKEditorField(u"文章", validators=[DataRequired()])
     submit = SubmitField(u"提交")
 
 

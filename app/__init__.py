@@ -22,9 +22,9 @@ login_manager.login_view = "auth.login"
 def register_commands(app):
     @app.cli.command()
     @click.option("--drop", is_flag=True, help="Create after drop")
-    def init_db(drop):
+    def initDB(drop):
         if drop:
-            click.comfirm("This operation will delete your database, do you want to continue?", abort=True)
+            # click.comfirm("This operation will delete your database, do you want to continue?", abort=True)
             db.drop_all()
             click.echo("Table droped")
         db.create_all()
@@ -35,10 +35,13 @@ def register_commands(app):
     @click.option("--posts", default=20, help="Quantity of posts, default is 10")
     @click.option("--articles", default=10, help="Quantity of articles, default is 10")
     def forge(categories, posts, articles):
-        from app.forge import forge_admin, forge_posts, forge_blog, forge_articles, forge_categories
+        from app.forge import forge_admin, forge_posts, forge_blogInfo, forge_articles, forge_categories
 
         click.echo("Generating admin...")
-        # forge_admin()
+        forge_admin()
+
+        click.echo("Generating blog infomation...")
+        forge_blogInfo()
 
         click.echo("Generating %d categories..." % categories)
         forge_categories(categories)
