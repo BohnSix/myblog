@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block main %}
+<div class="mypost">
+    <h1>在这里用一个 Tab 把 article 和 post 分开。</h1>
+    <h2>* 博文可视化编辑</h2>
+    <h2>* 说说可视化编辑</h2>
+    <h2>* 工具链可视化编辑</h2>
+    <h2>* 博客信息可视化编辑</h2>
+    <h2>* 插件可视化编辑</h2>
+</div>
+<div class="mypost" id="articles">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>标题</td>
+            <td>修改时间</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.id}}</td>
+            <td>
+                {{ article.title }}
+            </td>
+            <td>{{ article.timestamp}}</td>
+            <td>
+                <button class="btn btn-danger">
+                    <a style="color: black" href="{{ url_for('auth.del_article', id=article.id) }}">删除</a>
+                </button>
+                <button class="btn btn-primary">
+                    <a style="color: black" href="{{ url_for('auth.edit_article', id=article.id) }}">修改</a>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+<div class="mypost" id="posts">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>内容</td>
+            <td>修改时间</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.id}}</td>
+            <td>
+                {{ post.content }}
+            </td>
+            <td>{{ post.timestamp}}</td>
+            <td>
+                <button class="btn btn-danger">
+                    <a style="color: black" href="{{ url_for('auth.del_post', id=post.id) }}">删除</a>
+                </button>
+                <button class="btn btn-primary">
+                    <a style="color: black" href="{{ url_for('auth.edit_post', id=post.id) }}">修改</a>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

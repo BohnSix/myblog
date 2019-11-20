@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{%- block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='css/index.css')}}" rel="stylesheet" type="text/css">
+{%- endblock styles %}
+
+{% block main %}
+<div class="post-container">
+    {% for article in articles %}
+    <div class="mypost">
+        <h2 class="post-title">{{ article.title }}</h2>
+        <div class="post-meta">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            <span class="post-meta-text" aria-hidden="true">发表于</span>
+            <span class="post-meta-content" aria-hidden="true">{{ moment(article.timestamp).format("LL") }}</span>
+
+            <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> </span>
+
+            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+            <span class="post-meta-text" aria-hidden="true">分类于</span>
+            <span class="post-meta-content" aria-hidden="true">{{ article.category }}</span>
+
+
+            <br>
+
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <span class="post-meta-text" aria-hidden="true">本文字数：</span>
+            <span class="post-meta-content" aria-hidden="true">{{ article.content | count }}</span>
+
+            <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"> </span>
+
+            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+            <span class="post-meta-text" aria-hidden="true">阅读时长≈</span>
+            <span class="post-meta-content" aria-hidden="true">（未完成）分钟</span>
+        </div>
+        <div class="post-summary">{{ article.summary }}</div>
+        <div class="post-btn">
+            <a class="btn btn-default" href=""> 阅读全文 »</a>
+            {% if current_user.is_authenticated %}
+            <a class="btn btn-primary" href="{{ url_for('auth.edit_article', id=article.id) }}"> 修改 »</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
