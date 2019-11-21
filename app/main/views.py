@@ -9,14 +9,14 @@ from app.models import *
 @main.route('/')
 def index():
     articles = Article.query.order_by(Article.timestamp.desc())
-    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    blog_info = BlogInfo.query.first()
     return render_template('index.html', articles=articles, blog_info=blog_info)
 
 
 @main.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    blog_info = BlogInfo.query.first()
 
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -32,7 +32,7 @@ def login():
 
 @main.route("/resume/", methods=["GET", "POST"])
 def show_resume():
-    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    blog_info = BlogInfo.query.first()
     return render_template("resume.html", blog_info=blog_info)
 
 
@@ -42,7 +42,7 @@ def wbsy():
         return redirect(url_for("auth.wbsy"))
     page = request.args.get('page', 1, type=int)
     categories = Category.query.all()
-    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    blog_info = BlogInfo.query.first()
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
     next_url = url_for('main.wbsy', page=posts.next_num if posts.has_next else None)
@@ -53,5 +53,5 @@ def wbsy():
 
 @main.route('/me/', methods=["GET", "POST"])
 def about_me():
-    blog_info = BlogInfo.query.filter_by(choose=True).first()
+    blog_info = BlogInfo.query.first()
     return render_template("me.html", blog_info=blog_info)

@@ -22,8 +22,7 @@ def forge_blogInfo():
                         signature=u"高度自律即绝对自由",
                         selfIntro=u'flask新手',
                         github=u"https://github.com/bohnsix",
-                        email=u'bohnsix@163.com',
-                        choose=True)
+                        email=u'bohnsix@163.com')
     db.session.add(blogInfo)
     db.session.commit()
 

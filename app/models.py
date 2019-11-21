@@ -83,10 +83,9 @@ class BlogInfo(db.Model):
     title = db.Column(db.String(64))
     signature = db.Column(db.Text)
     name = db.Column(db.String(64))
-    selfIntro = db.Column(db.String(64))
+    selfIntro = db.Column(db.Text)
     github = db.Column(db.String(64))
     email = db.Column(db.String(64))
-    choose = db.Column(db.Boolean)
     # friendLink = db.Column(db.String(64))  # 用外键连接一张表
     # avatar = db.Column(db.Text)
 

@@ -2,73 +2,99 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block main %}
-<div class="mypost">
-    <h1>在这里用一个 Tab 把 article 和 post 分开。</h1>
-</div>
-<div class="mypost" id="articles">
-    <table class="table">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>标题</td>
-            <td>修改时间</td>
-            <td>操作</td>
-        </tr>
-        </thead>
+    <div class="mypost">
+        <h1>在这里用 Tab 把 bloginfo 、article 和 post 分开。</h1>
+        <h1>把 BlogInfo 的样式（#bloginfo2）改成(#bloginfo1)的样式。</h1>
+    </div>
+    <div class="mypost" id="bloginfo1">
+        <form method="post">
+            <div class="input-group">
+                <span class="input-group-addon">博客名</span>
+                <input type="text" class="form-control" id="title" aria-describedby="basic-addon3">
+            </div><br />
+            <div class="input-group">
+                <span class="input-group-addon">个性签名</span>
+                <input type="text" class="form-control" id="signature" aria-describedby="basic-addon3">
+            </div><br />
+            <div class="input-group">
+                <span class="input-group-addon">用户名</span>
+                <input type="text" class="form-control" id="name" aria-describedby="basic-addon3">
+            </div><br />
+            <div class="input-group">
+                <span class="input-group-addon">自我介绍</span>
+                <input type="text" class="form-control" id="selfintro" aria-describedby="basic-addon3">
+            </div><br />
+        </form>
+    </div>
+    <div class="mypost" id="bloginfo2">
+        <form method="post">
+            {{ wtf.quick_form(form) }}
+        </form>
+    </div>
+    <div class="mypost" id="articles">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>标题</td>
+                <td>修改时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
 
-        <tbody>
-        {% for article in articles %}
-        <tr>
-            <td>{{ article.id}}</td>
-            <td>
-                {{ article.title }}
-            </td>
-            <td>{{ article.timestamp}}</td>
-            <td>
-                <button class="btn btn-danger">
-                    <a style="color: black" href="{{ url_for('auth.del_article', id=article.id) }}">删除</a>
-                </button>
-                <button class="btn btn-primary">
-                    <a style="color: black" href="{{ url_for('auth.edit_article', id=article.id) }}">修改</a>
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>
+                        {{ article.title }}
+                    </td>
+                    <td>{{ article.timestamp }}</td>
+                    <td>
+                        <button class="btn btn-danger">
+                            <a style="color: black" href="{{ url_for('auth.del_article', id=article.id) }}">删除</a>
+                        </button>
+                        <button class="btn btn-primary">
+                            <a style="color: black" href="{{ url_for('auth.edit_article', id=article.id) }}">修改</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
 
-    </table>
-</div>
-<div class="mypost" id="posts">
-    <table class="table">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>内容</td>
-            <td>修改时间</td>
-            <td>操作</td>
-        </tr>
-        </thead>
+        </table>
+    </div>
+    <div class="mypost" id="posts">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>内容</td>
+                <td>修改时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
 
-        <tbody>
-        {% for post in posts %}
-        <tr>
-            <td>{{ post.id}}</td>
-            <td>
-                {{ post.content }}
-            </td>
-            <td>{{ post.timestamp}}</td>
-            <td>
-                <button class="btn btn-danger">
-                    <a style="color: black" href="{{ url_for('auth.del_post', id=post.id) }}">删除</a>
-                </button>
-                <button class="btn btn-primary">
-                    <a style="color: black" href="{{ url_for('auth.edit_post', id=post.id) }}">修改</a>
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>
+                        {{ post.content }}
+                    </td>
+                    <td>{{ post.timestamp }}</td>
+                    <td>
+                        <button class="btn btn-danger">
+                            <a style="color: black" href="{{ url_for('auth.del_post', id=post.id) }}">删除</a>
+                        </button>
+                        <button class="btn btn-primary">
+                            <a style="color: black" href="{{ url_for('auth.edit_post', id=post.id) }}">修改</a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
 
-    </table>
-</div>
+        </table>
+    </div>
 {% endblock %}

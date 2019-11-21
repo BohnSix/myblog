@@ -41,3 +41,13 @@ class EditArticleForm(FlaskForm):
 class EditPostForm(FlaskForm):
     content = TextAreaField(u"内容", validators=[DataRequired()])
     submit = SubmitField(u"提交")
+
+
+class EditBlogInfoForm(FlaskForm):
+    title = StringField(u"博客名", validators=[DataRequired(), Length(1, 64)])
+    signature = StringField(u"个性签名", validators=[DataRequired(), Length(1, 64)])
+    name = StringField(u"用户名", validators=[DataRequired(), Length(1, 64)])
+    selfIntro = StringField(u"自我介绍", validators=[DataRequired(), Length(1, 64)])
+    github = StringField(u"github地址", validators=[DataRequired(), Length(1, 64)])
+    email = StringField(u"邮箱", validators=[DataRequired(), Length(1, 64)])
+    submit = SubmitField(u"提交")
